@@ -773,7 +773,7 @@
 	  };
 	};
 
-	const nameMap$1 = new Map();
+	const nameMap = new Map();
 	let loaded$2 = false;
 
 	const getName = async () => {
@@ -791,13 +791,13 @@
 	      const trans = trim(item.trans, true);
 
 	      if (name && trans && name !== trans) {
-	        nameMap$1.set(name, trans);
+	        nameMap.set(name, trans);
 	      }
 	    });
 	    loaded$2 = true;
 	  }
 
-	  return nameMap$1;
+	  return nameMap;
 	};
 
 	let commonMap = new Map();
@@ -1216,7 +1216,7 @@
 	const textMap = new Map();
 	const expMap$1 = new Map();
 	const nounMap$1 = new Map();
-	const nameMap$2 = new Map();
+	const nameMap$1 = new Map();
 	const noteMap = new Map();
 	let loaded$6 = false;
 
@@ -1250,7 +1250,7 @@
 	            reMap.set("\u3010".concat(text, "\u3011"), "\u3010".concat(trans, "\u3011"));
 	          } else if (type === 'name') {
 	            nameArr.push(pureRE(text));
-	            nameMap$2.set(text, trans);
+	            nameMap$1.set(text, trans);
 	          } else if (type === 'text') {
 	            textMap.set(text, trans);
 	          } else {
@@ -1278,7 +1278,7 @@
 	    loaded$6 = true;
 	  }
 
-	  const wordMaps = [nounMap$1, noteMap, nameMap$2];
+	  const wordMaps = [nounMap$1, noteMap, nameMap$1];
 	  return {
 	    expMap: expMap$1,
 	    wordMaps,
@@ -6594,6 +6594,7 @@
 	          transStory(res, storyMap, commMap, nameMap);
 	        } else if (config.auto === 'on') {
 	          const commMap = await getCommStory();
+	          const nameMap = await getName();
 	          transStory2(res, commMap, nameMap);
 	          await autoTrans(res, commMap, name);
 	        }
