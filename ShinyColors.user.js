@@ -429,7 +429,7 @@
 
 	const PREVIEW_COUNT = 5;
 	const config = {
-	  origin: 'https://github.com/newbiepr/shinycolors-trans-kr/build/',
+	  origin: 'https://newbiepr.github.io/shinymaskr',
 	  hash: '',
 	  localHash: '',
 	  version: version,
@@ -437,7 +437,7 @@
 	  timeout: 30,
 	  font1: 'yuanti',
 	  font2: 'heiti',
-	  auto: 'off'
+	  auto: 'on'
 	};
 	const defaultConfig = Object.assign({}, config);
 	const fontList = ['yuanti', 'heiti', 'yuanti2'];
@@ -456,7 +456,7 @@
 	};
 
 	const fixDefault = data => {
-	  if (data.origin === 'https://newbiepr.github.io/shinycolors-trans-kr') {
+	  if (data.origin === 'https://newbiepr.github.io/shinymaskr') {
 	    data.origin = defaultConfig.origin;
 	  }
 	};
@@ -773,7 +773,7 @@
 	  };
 	};
 
-	const nameMap = new Map();
+	const nameMap$1 = new Map();
 	let loaded$2 = false;
 
 	const getName = async () => {
@@ -791,13 +791,13 @@
 	      const trans = trim(item.trans, true);
 
 	      if (name && trans && name !== trans) {
-	        nameMap.set(name, trans);
+	        nameMap$1.set(name, trans);
 	      }
 	    });
 	    loaded$2 = true;
 	  }
 
-	  return nameMap;
+	  return nameMap$1;
 	};
 
 	let commonMap = new Map();
@@ -1216,7 +1216,7 @@
 	const textMap = new Map();
 	const expMap$1 = new Map();
 	const nounMap$1 = new Map();
-	const nameMap$1 = new Map();
+	const nameMap$2 = new Map();
 	const noteMap = new Map();
 	let loaded$6 = false;
 
@@ -1250,7 +1250,7 @@
 	            reMap.set("\u3010".concat(text, "\u3011"), "\u3010".concat(trans, "\u3011"));
 	          } else if (type === 'name') {
 	            nameArr.push(pureRE(text));
-	            nameMap$1.set(text, trans);
+	            nameMap$2.set(text, trans);
 	          } else if (type === 'text') {
 	            textMap.set(text, trans);
 	          } else {
@@ -1278,7 +1278,7 @@
 	    loaded$6 = true;
 	  }
 
-	  const wordMaps = [nounMap$1, noteMap, nameMap$1];
+	  const wordMaps = [nounMap$1, noteMap, nameMap$2];
 	  return {
 	    expMap: expMap$1,
 	    wordMaps,
@@ -6536,6 +6536,29 @@
 	  });
 	};
 
+	const transStory2 = (data, commMap, nameMap) => {
+	  if (!Array.isArray(data)) return;
+	  data.forEach(item => {
+	    transSpeaker(item, nameMap);
+
+	    if (item.text) {
+	      const text = removeWrap(item.text);
+
+	      if (commMap.has(item.text)) {
+	        item.text = tagText(commMap.get(item.text));
+	      }
+	    }
+
+	    if (item.select) {
+	      const select = removeWrap(item.select);
+
+	      if (commMap.has(item.select)) {
+	        item.select = tagText(commMap.get(item.select));
+	      }
+	    }
+	  });
+	};
+
 	const transScenario = async () => {
 	  const scnModule = await getModule();
 	  if (!scnModule) return;
@@ -6571,6 +6594,7 @@
 	          transStory(res, storyMap, commMap, nameMap);
 	        } else if (config.auto === 'on') {
 	          const commMap = await getCommStory();
+	          transStory2(res, commMap, nameMap);
 	          await autoTrans(res, commMap, name);
 	        }
 	      } catch (e) {
