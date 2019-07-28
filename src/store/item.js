@@ -10,10 +10,8 @@ let loaded = false
 const getItem = async () => {
   if (!loaded) {
     let csv = await getLocalData('item')
-    if (!csv) {
       csv = await fetchData('/data/item.csv')
       setLocalData('item', csv)
-    }
     const list = parseCsv(csv)
     list.forEach(item => {
       if (item && item.text) {

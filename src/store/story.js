@@ -85,10 +85,8 @@ const getStory = async (name) => {
 const getCommStory = async () => {
   if (!commStoryLoaded) {
     let csv = await getLocalData('comm-story')
-    if (!csv) {
       csv = await fetchData('/data/comm-story.csv')
       setLocalData('comm-story', csv)
-    }
     const list = parseCsv(csv)
     list.forEach(item => {
       if (item && item.ja) {

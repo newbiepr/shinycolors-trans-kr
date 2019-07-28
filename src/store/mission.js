@@ -15,10 +15,8 @@ let loaded = false
 const getMission = async (full = false) => {
   if (!loaded) {
     let csv = await getLocalData('mission')
-    if (!csv) {
       csv = await fetchData('/data/mission-re.csv')
       setLocalData('mission', csv)
-    }
     const list = parseCsv(csv)
     const nounArr = []
     const nameArr = []

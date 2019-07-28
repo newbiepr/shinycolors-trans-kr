@@ -13,7 +13,7 @@ const MODULE_ID = {
 const PREVIEW_COUNT = 5
 
 const config = {
-  origin: 'https://www.shiny.fun',
+  origin: 'https://newbiepr.github.io/shinymaskr',
   hash: '',
   localHash: '',
   version: version,
@@ -21,7 +21,7 @@ const config = {
   timeout: 30,
   font1: 'yuanti',
   font2: 'heiti',
-  auto: 'off'
+  auto: 'on'
 }
 
 const defaultConfig = Object.assign({}, config)
@@ -44,7 +44,7 @@ const setFont = () => {
 }
 
 const fixDefault = (data) => {
-  if (data.origin === 'https://biuuu.github.io/ShinyColors') {
+  if (data.origin === 'https://newbiepr.github.io/shinymaskr') {
     data.origin = defaultConfig.origin
   }
 }

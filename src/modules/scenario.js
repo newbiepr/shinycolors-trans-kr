@@ -122,6 +122,30 @@ const transStory = (data, storyMap, commMap, nameMap) => {
   })
 }
 
+	const transStory2 = (data, commMap, nameMap) => {
+	  if (!Array.isArray(data)) return;
+	  data.forEach(item => {
+	    transSpeaker(item, nameMap);
+
+	    if (item.text) {
+	      const text = removeWrap(item.text);
+
+	      if (commMap.has(item.text)) {
+	        item.text = tagText(commMap.get(item.text));
+	      }
+	    }
+
+	    if (item.select) {
+	      const select = removeWrap(item.select);
+	      const sKey = "".concat(select, "-select");
+
+	      if (commMap.has(item.select)) {
+	        item.select = tagText(commMap.get(item.select));
+	      }
+	    }
+	  });
+	};
+
 const transScenario = async () => {
   const scnModule = await getModule()
   if (!scnModule) return
@@ -160,6 +184,8 @@ const transScenario = async () => {
           transStory(res, storyMap, commMap, nameMap)
         } else if (config.auto === 'on') {
           const commMap = await getCommStory()
+          const nameMap = await getName()
+		  transStory2(res, commMap, nameMap)
           await autoTrans(res, commMap, name)
         }
       } catch (e) {

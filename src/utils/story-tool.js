@@ -92,12 +92,12 @@ const html = `
     background-color: #f7f7f7;
   }
   </style>
-  <div id="sczh-story-tool"><span class="text-sczh">剧情</span>
-    <span id="btn-close-sczh" class="btn-close-sczh">关闭</span>
+  <div id="sczh-story-tool"><span class="text-sczh">커뮤</span>
+    <span id="btn-close-sczh" class="btn-close-sczh">닫기</span>
     <input type="file" style="display:none" id="ipt-preview-sczh" multiple accept=".csv">
     <div class="story-tool-btns">
-      <label for="ipt-preview-sczh">预览</label>
-      <div id="btn-download-sczh" class="btn-download-sczh">下载</div>
+      <label for="ipt-preview-sczh">실험</label>
+      <div id="btn-download-sczh" class="btn-download-sczh">다운</div>
     </div>
   </div>
   `
@@ -174,7 +174,7 @@ const showStoryTool = (storyCache) => {
           const _name = storyMap.get('name')
           storyCache.preview.set(_name, storyMap)
           savePreview(storyCache.preview)
-          alert(`导入${_name}成功`)
+          alert(`도입${_name}성공`)
         }
       }
       reader.readAsText(file)

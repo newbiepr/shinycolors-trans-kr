@@ -10,10 +10,8 @@ let loaded = false
 const getTypeTextMap = async () => {
   if (!loaded) {
     let csv = await getLocalData('type-text')
-    if (!csv) {
       csv = await fetchData('/data/type-text.csv')
       setLocalData('type-text', csv)
-    }
     const list = parseCsv(csv)
     list.forEach(item => {
       if (item && item.ja) {
@@ -25,7 +23,7 @@ const getTypeTextMap = async () => {
       }
     })
     const commStoryMap = await getCommStory()
-    typeTextMap = new Map([...commStoryMap, ...typeTextMap])
+    typeTextMap = new Map([...typeTextMap])
     loaded = true
   }
 

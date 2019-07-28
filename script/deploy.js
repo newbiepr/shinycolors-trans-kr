@@ -74,7 +74,7 @@ const start = async () => {
     return
   }
   if (process.env.CUSTOM_DOMAIN) {
-    await fse.outputFile('./dist/CNAME', 'www.shiny.fun')
+    await fse.outputFile('./dist/CNAME', 'newbiepr.github.io/shinymaskr')
   }
   if (process.env.TRAVIS) {
     console.log('travis')

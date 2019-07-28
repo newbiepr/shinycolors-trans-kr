@@ -13,10 +13,8 @@ let loaded = false
 const getSupportSkill = async () => {
   if (!loaded) {
     let csv = await getLocalData('support-skill')
-    if (!csv) {
       csv = await fetchData('/data/support-skill.csv')
       setLocalData('support-skill', csv)
-    }
     const list = parseCsv(csv)
     const reMap = new Map()
     sortWords(list, 'text').forEach(item => {

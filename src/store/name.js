@@ -9,10 +9,8 @@ let loaded = false
 const getName = async () => {
   if (!loaded) {
     let csv = await getLocalData('name')
-    if (!csv) {
       csv = await fetchData('/data/name.csv')
       setLocalData('name', csv)
-    }
     const list = parseCsv(csv)
     list.forEach(item => {
       const name = trim(item.name, true)

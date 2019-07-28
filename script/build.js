@@ -5,16 +5,16 @@ const resolve = require('rollup-plugin-node-resolve')
 const cmjs = require('rollup-plugin-commonjs')
 
 const banner = `// ==UserScript==
-// @name         偶像大师ShinyColors汉化
-// @namespace    https://github.com/biuuu/ShinyColors
+// @name         샤니마스 한글 패치
+// @namespace    https://github.com/newbiepr/shinycolors-trans-kr
 // @version      ${version}
-// @description  提交翻译或问题请到 https://github.com/biuuu/ShinyColors
+// @description  샤니마스 한글 패치 스크립트입니다.
 // @icon         https://shinycolors.enza.fun/icon_192x192.png
-// @author       biuuu
+// @author       Source : biuuu(https://github.com/biuuu/ShinyColors)
 // @match        https://shinycolors.enza.fun/*
 // @run-at       document-start
-// @updateURL    https://www.shiny.fun/ShinyColors.user.js
-// @supportURL   https://github.com/biuuu/ShinyColors/issues
+// @updateURL    https://newbiepr.github.io/shinymaskr/ShinyColors.user.js
+// @supportURL   https://github.com/newbiepr/shinycolors-trans-kr/issues
 // ==/UserScript==`
 module.exports = {
   input: 'src/main.js',

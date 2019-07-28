@@ -9,10 +9,8 @@ let loaded = false
 const getImage = async () => {
   if (!loaded) {
     let csv = await getLocalData('image')
-    if (!csv) {
       csv = await fetchData('/data/image.csv')
       setLocalData('image', csv)
-    }
     const list = parseCsv(csv)
     list.forEach(item => {
       if (item && item.name) {
